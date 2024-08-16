@@ -37,7 +37,7 @@ The script uses predefined arrays for units and tens to map numbers to words. It
 To run the script:
 
 ```
-node index.js
+node numbertoword.js
 ```
 
 When you run the script, it will prompt you to enter a number. Type any number (e.g., `-1234.56`) and press Enter. The output will display the number in words, e.g., `Negative One Thousand Two Hundred and Thirty Four point Five Six`.
