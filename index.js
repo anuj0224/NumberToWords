@@ -48,14 +48,47 @@ const units = [
     return wordRepresentation.trim();
   }
   
+  function convertDecimal(decimalStr) {
+    let decimalWords = '';
+    for (let i = 0; i < decimalStr.length; i++) {
+      let digit = parseInt(decimalStr.charAt(i));
+      decimalWords += units[digit] + ' ';
+    }
+    return decimalWords.trim();
+  }
+  
+  function convertNumberToWords(input) {
+    let isNegative = false;
+    if (input.startsWith('-')) {
+      isNegative = true;
+      input = input.slice(1);  // Remove the negative sign for further processing
+    }
+  
+    let wordRepresentation = '';
+  
+    if (input.includes('.')) {
+      const [wholePart, decimalPart] = input.split('.');
+      const wholePartInWords = convert(parseInt(wholePart));
+      const decimalPartInWords = convertDecimal(decimalPart);
+      wordRepresentation = `${wholePartInWords} point ${decimalPartInWords}`;
+    } else {
+      wordRepresentation = convert(parseInt(input));
+    }
+  
+    if (isNegative) {
+      wordRepresentation = "Negative " + wordRepresentation;
+    }
+  
+    return wordRepresentation;
+  }
+  
   const readline = require('readline').createInterface({
     input: process.stdin,
     output: process.stdout
   });
   
   readline.question('Enter a number: ', (input) => {
-    const number = parseInt(input);
-    console.log('Number in words:', convert(number));
+    console.log('Number in words:', convertNumberToWords(input));
     readline.close();
   });
   
